@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Coloca os itens em coluna */
+    width: 100%;
+    align-items: center; /* Centraliza os elementos na horizontal */
+}
+
+.perfil-container {
+    width: 50%; /* Define a largura do perfil */
+    margin: 0 auto; /* Centraliza horizontalmente */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espaçamento entre os grupos de formulário */
+}
+
+input[type="file"], 
+input[type="text"], 
+input[type="password"] {
+    width: 100%; /* Largura total dos inputs */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 5px; /* Cantos arredondados */
+    box-sizing: border-box; /* Para incluir padding na largura total */
+}
+
+button {
+    width: 100%; /* Largura total do botão */
+    padding: 10px; /* Espaçamento interno */
+    border: none; /* Remove borda padrão */
+    background-color: #007bff; /* Cor de fundo */
+    color: white; /* Cor do texto */
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer; /* Muda o cursor para indicar clicável */
+    margin-top: 10px; /* Espaçamento acima dos botões */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
+}
+
+.message {
+    color: red; /* Cor para mensagens de erro ou informação */
+    margin-top: 10px; /* Espaçamento acima das mensagens */
+}
+
+a.button {
+    display: inline-block; /* Para aplicar estilos corretamente */
+    text-decoration: none; /* Remove o sublinhado */
+    padding: 10px 15px; /* Espaçamento interno */
+    background-color: #28a745; /* Cor de fundo do link */
+    color: white; /* Cor do texto */
+    border-radius: 5px; /* Cantos arredondados */
+    margin-top: 10px; /* Espaçamento acima do link */
+}
+
+a.button:hover {
+    background-color: #218838; /* Cor ao passar o mouse */
+}
+
+#profileImg{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

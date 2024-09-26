@@ -1,0 +1,80 @@
+/* index.css */
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('brazil.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    margin: left 215px;;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.6); /* Ajustado para 60% opacidade */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: #0056b3;
+}
+
+/* Estilos específicos para login */
+.login-form {
+    background-color: rgba(231, 240, 255, 0.7); /* Ajustado para 70% opacidade */
+    border: 1px solid #d6e4ff;
+}
+
+.login-form label {
+    font-weight: bold;
+}
+
+.login-form input[type="submit"] {
+    background-color: #0056b3;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #003d7a;
+}
+
+/* Estilos específicos para registro */
+.register-form {
+    background-color: rgba(231, 255, 231, 0.7); /* Ajustado para 70% opacidade */
+    border: 1px solid #d6ffd6;
+}
+
+.register-form label {
+    font-weight: bold;
+}
+
+.register-form input[type="submit"] {
+    background-color: #28a745;
+}
+
+.register-form input[type="submit"]:hover {
+    background-color: #218838;
+}
