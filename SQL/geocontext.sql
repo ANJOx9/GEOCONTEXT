@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/09/2024 às 02:10
+-- Tempo de geração: 26/09/2024 às 02:52
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -68,6 +68,26 @@ INSERT INTO `estados` (`id`, `nome`, `sigla`, `latitude`, `longitude`) VALUES
 (26, 'Tocantins', 'TO', '-10.8855129', '-48.3716912'),
 (28, 'Paraná', 'PR', '-24.4842187', '-51.8148872');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `photo` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `photo`) VALUES
+(1, 'diogo', '$2y$10$v8bTd7gzDCbL3RVKYusFCeQj0xj6j5TRuyc5BufZOfEJVk6T.6eTK', NULL);
+
 --
 -- Índices para tabelas despejadas
 --
@@ -79,6 +99,12 @@ ALTER TABLE `estados`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices de tabela `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -87,6 +113,12 @@ ALTER TABLE `estados`
 --
 ALTER TABLE `estados`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
