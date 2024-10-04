@@ -14,7 +14,8 @@ body {
 }
 
 .container {
-    max-width: 500px;
+    width: 500px;
+    height: 300px;
     margin: 50px auto;
     padding: 20px;
     background: rgba(255, 255, 255, 0.6); /* Ajustado para 60% opacidade */
@@ -26,6 +27,11 @@ body {
 h1 {
     text-align: center;
     color: #333;
+    font-family: "Outfit", sans-serif;
+}
+
+.fonte1{
+    font-family: "Oswald", sans-serif;
 }
 
 .button {
@@ -36,11 +42,15 @@ h1 {
     text-decoration: none;
     border-radius: 4px;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-left: 0px;
+    width: 100%;
+    font-family: "Outfit", sans-serif;
+    transition: all 450ms ease-in-out;
 }
 
 .button:hover {
-    background: #0056b3;
+    background: #0fb300;
 }
 
 /* Estilos específicos para login */
@@ -77,4 +87,29 @@ h1 {
 
 .register-form input[type="submit"]:hover {
     background-color: #218838;
+}
+
+
+img {
+    width: 30%;
+}
+
+.carousel-custom {
+    width: 40%; /* Define a largura para 40% */
+    margin: auto; /* Centraliza o carrossel na página */
+}
+
+.carousel-item img {
+    width: 40%; /* Garante que as imagens ocupem 100% da largura do carrossel */
+    height: 300px;
+}
+
+.container {
+    max-width: 30%;
+    margin-left: 35%;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.6); /* Ajustado para 60% opacidade */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

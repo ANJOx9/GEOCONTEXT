@@ -30,7 +30,7 @@ session_start();
 
             <form action="upload.php" method="POST" enctype="multipart/form-data">
                 <input type="file"  id="fileInput" name="profile_picture" accept="image/*" required>
-                <button type="submit">Alterear foto</button>
+                <button type="submit">Alterar foto</button>
             </form>
 
         <div class="form-group">
@@ -67,6 +67,7 @@ session_start();
             if (password !== confirmPassword) {
                 document.getElementById('message').textContent = 'As senhas não coincidem.';
                 document.getElementById('message').classList.add('error');
+                
                 return;
             }
 

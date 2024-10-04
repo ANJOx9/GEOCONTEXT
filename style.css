@@ -8,7 +8,6 @@ body {
     align-items: center;
     height: 100vh; /* Preenche a tela */
 }
-
 .perfil-container {
     width: 300px; /* Largura da moldura */
     padding: 20px;
@@ -18,11 +17,9 @@ body {
     text-align: center;
     border: 1px solid #ccc; /* Borda da moldura */
 }
-
 .profile-picture-container {
     margin-bottom: 20px; /* Espaço abaixo da imagem */
 }
-
 .profile-picture {
     width: 100px; /* Largura do círculo */
     height: 100px; /* Altura do círculo */
@@ -34,23 +31,19 @@ body {
     overflow: hidden; /* Para esconder partes que saem do círculo */
     margin: 0 auto; /* Centraliza o círculo */
 }
-
 .profile-picture img {
     width: 100%; /* Ajusta a largura da imagem */
     height: 100%; /* Ajusta a altura da imagem para caber no círculo */
     object-fit: cover; /* Cobre o círculo e mantém a proporção */
 }
-
 .form-group {
     margin: 10px 0; /* Espaço entre os campos */
 }
-
 input[type="file"] {
     width: calc(100% - 20px); /* Ajusta a largura do campo de arquivo */
     padding: 10px;
     box-sizing: border-box;
 }
-
 button {
     display: block;
     width: 100%;
@@ -63,12 +56,10 @@ button {
     border-radius: 5px;
     margin-top: 10px; /* Espaço entre os botões */
 }
-
 .message {
     margin-top: 10px;
     color: red; /* Cor da mensagem de erro */
 }
-
 body {
     font-family: Arial, sans-serif;
     background-image: url('brazil.jpg');
