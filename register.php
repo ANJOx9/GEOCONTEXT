@@ -83,5 +83,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
         <a href="index.php" class="button">Voltar</a>
     </div>
+
+    <style>
+        body {
+            background-image: url('imgs/brazil.jpg'); /* Altere para o caminho da sua imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a área */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Não repete a imagem */
+            height: 100vh; /* Faz o body ocupar 100% da altura da tela */
+            margin: 0; /* Remove margens padrão do body */
+        }
+        
+    </style>
 </body>
 </html>

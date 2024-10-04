@@ -23,6 +23,17 @@
             <a href="logout.php" class="btn">Logout</a>
         </form>
 
+        <style>
+        body {
+            background-image: url('imgs/brazil.jpg'); /* Altere para o caminho da sua imagem */
+            background-size: cover; /* Faz a imagem cobrir toda a área */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Não repete a imagem */
+            height: 100vh; /* Faz o body ocupar 100% da altura da tela */
+            margin: 0; /* Remove margens padrão do body */
+        }
+    </style>
+
         <div id="message" class="message"></div>
 
         <div id="history" class="history">

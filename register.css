@@ -1,19 +1,21 @@
-/* Estilos específicos para a página de registro */
+
 body {
-    background-image: url('brazil.jpg'); /* Imagem de fundo padrão */
-    background-size: cover; /* Faz com que a imagem cubra toda a tela */
-    background-position: center; /* Centraliza a imagem */
-    background-attachment: fixed; /* Mantém a imagem fixa ao rolar a página */
+    font-family: Arial, sans-serif;
+    background-image: url('imgs/brazil.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif; /* Define a fonte padrão para a página */
+    margin: left 215px;;
 }
 
 .container {
     max-width: 600px;
     margin: 50px auto;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.9); /* Fundo branco semi-transparente para a caixa de conteúdo */
+    background: rgba(255, 255, 255, 0.9); 
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);

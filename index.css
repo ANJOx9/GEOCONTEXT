@@ -2,8 +2,8 @@
 
 /* Estilos gerais */
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('brazil.jpg');
+    font-family: "Lexend", system-ui;
+    background-image: url('imgs/brazil.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
