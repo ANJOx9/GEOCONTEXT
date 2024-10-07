@@ -1,5 +1,9 @@
 /* Define o fundo da página de login com uma imagem */
 body {
+    font-family: "Lexend", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     background-image: url('brazil.jpg'); /* Substitua 'brazil.jpg' pelo caminho da sua imagem */
     background-size: cover; /* Faz com que a imagem cubra toda a tela */
     background-position: center; /* Centraliza a imagem */

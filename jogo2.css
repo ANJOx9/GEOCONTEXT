@@ -1,5 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lexend", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     background-image: url('imgs/brazil.jpg');
     background-size: cover;
     background-position: center;

@@ -1,5 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lexend", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;

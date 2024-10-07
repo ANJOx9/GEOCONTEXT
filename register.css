@@ -1,6 +1,9 @@
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Lexend", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
     background-image: url('imgs/brazil.jpg');
     background-size: cover;
     background-position: center;
@@ -49,7 +52,7 @@ input[type="file"] {
 }
 
 input[type="submit"] {
-    background: #28a745;
+    background: #007BFF;
     color: white;
     border: none;
     padding: 15px;
@@ -74,6 +77,7 @@ input[type="submit"]:hover {
     text-align: center;
     margin-top: 15px;
     font-size: 16px;
+
 }
 
 .button:hover {

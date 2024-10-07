@@ -67,7 +67,6 @@ session_start();
             if (password !== confirmPassword) {
                 document.getElementById('message').textContent = 'As senhas não coincidem.';
                 document.getElementById('message').classList.add('error');
-                
                 return;
             }
 

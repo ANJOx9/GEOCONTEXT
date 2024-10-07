@@ -1,6 +1,10 @@
 /* Define o fundo da página de login com uma imagem */
 body {
-    background-image: url('brazil.jpg'); /* Substitua 'brazil.jpg' pelo caminho da sua imagem */
+    font-family: "Lexend", system-ui;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    background-image: url("imgs/brazil.jpg"); /* Substitua 'brazil.jpg' pelo caminho da sua imagem */
     background-size: cover; /* Faz com que a imagem cubra toda a tela */
     background-position: center; /* Centraliza a imagem */
     font-family: Arial, sans-serif; /* Define a fonte da página */
@@ -41,7 +45,7 @@ input[type="text"], input[type="password"] {
 
 /* Estilo do botão de submit */
 input[type="submit"] {
-    background-color: #4CAF50; /* Cor do fundo do botão */
+    background-color: #007BFF; /* Cor do fundo do botão */
     color: white;
     padding: 10px;
     border: none;
