@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url('brazil.jpg');
+    background-image: url('imgs/brazil.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

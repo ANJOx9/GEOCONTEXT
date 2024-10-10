@@ -53,20 +53,8 @@ h1 {
 }
 
 .btn {
-    display: block;
-    width: 50px;
-    padding: 10px;
-    background-color: #42668d;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.btn {
-    width: 50px;
-    padding: 210px;
+    width: 60px;
+    padding: 8px;
     background-color: #42668d;
     color: #fff;
     font-size: 16px;
