@@ -1,98 +1,137 @@
 <?php
-session_start();
+session_start(); // Inicia a sessão
+
+// Conexão com o banco de dados
+$servername = "localhost";
+$username = "root"; // Altere para seu nome de usuário do MySQL
+$password = ""; // Altere para sua senha do MySQL, se houver
+$dbname = "geocontext"; // Altere para o nome do seu banco de dados
+
+// Criando a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Verifica a conexão
+if ($conn->connect_error) {
+    die("Conexão falhou: " . $conn->connect_error);
+}
+
+// Verifica se o usuário está logado
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php"); // Redireciona para a página de login se não estiver logado
+    exit();
+}
+
+// Consulta para obter informações do player com base no ID do usuário logado
+$sql = "SELECT id, nome, senha, imagem_perfil FROM players WHERE id = ?";
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    die("Erro ao preparar a consulta: " . $conn->error); // Verifica se houve erro ao preparar a consulta
+}
+
+// Usa o ID do usuário logado para a consulta
+$stmt->bind_param("i", $_SESSION['user_id']);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Verifica se o jogador foi encontrado
+if ($result->num_rows === 0) {
+    die("Usuário não encontrado!"); // Se nenhum usuário for encontrado com esse id
+}
+
+$player = $result->fetch_assoc();
+$stmt->close(); // Fecha a declaração
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Foto de Perfil</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Perfil do Usuário</title>
     <link rel="stylesheet" href="perfil.css">
-</head>
-<body>
-    <div class="container">
-        <div class="perfil-container">
-            <h1>Alterar Foto de Perfil</h1>
-            <div class="profile-picture-container">
-            <?php if (isset($_SESSION['profile_picture'])): ?>
-    <div class="profile-picture-container">
-        <img id="profileImg" src="<?php echo htmlspecialchars($_SESSION['profile_picture']); ?>" alt="Foto de Perfil">
-    </div>
-<?php else: ?>
-    <div class="profile-picture-container">
-        <img id="profileImg" src="default-profile.png" alt="Foto de Perfil">
-    </div>
-<?php endif; ?>
-            </div>
-            <div class="message" id="message"></div>
-
-            <form action="upload.php" method="POST" enctype="multipart/form-data">
-                <input type="file"  id="fileInput" name="profile_picture" accept="image/*" required>
-                <button type="submit">Alterar foto</button>
-            </form>
-
-        <div class="form-group">
-            <label for="username">Nome de Usuário:</label>
-            <input type="text" id="username" name="username" value="<?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : ''; ?>" required>
-        </div>
+    <style>
+        /* Estilos adicionais para os botões */
+        .voltar-jogo, .alterar-perfil {
+            position: absolute;
+            padding: 10px 15px;
+            background-color: #007bff; /* Cor de fundo do botão */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor em forma de mão */
+            font-size: 16px; /* Tamanho da fonte */
+            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+        }
         
-        <div class="form-group">
-            <label for="password">Nova Senha:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <div class="form-group">
-            <label for="confirm-password">Confirme a Nova Senha:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-        </div>
-
-        <button type="button" id="updateProfile">Atualizar Perfil</button>
-        <button type="button" id="deleteAccount">Excluir Conta</button>
+        .voltar-jogo {
+            top: 15px; /* Distância do topo */
+            left: 15px; /* Distância da esquerda */
+        }
         
-        <div id="message" class="message"></div>
-
-        <a href="jogo.php" class="button">voltar</a>
-        </div>
-        
-    </div>
-
-    <script>
-        document.getElementById('updateProfile').addEventListener('click', function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-
-            if (password !== confirmPassword) {
-                document.getElementById('message').textContent = 'As senhas não coincidem.';
-                document.getElementById('message').classList.add('error');
-                return;
-            }
-
-            // Lógica para enviar os dados ao servidor pode ser implementada aqui
-        });
-
-        document.getElementById('deleteAccount').addEventListener('click', function() {
-            if (confirm('Tem certeza que deseja excluir sua conta?')) {
-                // Lógica para excluir a conta pode ser implementada aqui
-            }
-        });
-
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            const img = document.getElementById('profileImg');
-            img.src = e.target.result;
+        .voltar-jogo:hover {
+            background-color: #0056b3; /* Cor ao passar o mouse */
         }
 
-        reader.readAsDataURL(file);
-    }
-});
+        .alterar-perfil {
+            top: 15px; /* Distância do topo */
+            right: 15px; /* Distância da direita */
+        }
+        
+        .alterar-perfil:hover {
+            background-color: #0056b3; /* Cor ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Botão Voltar ao Jogo -->
+<button class="voltar-jogo" onclick="location.href='jogo.php'">Voltar ao Jogo</button>
+
+<!-- Botão Alterar Perfil -->
+<button class="alterar-perfil" onclick="location.href='perfil-alt.php'">Alterar Perfil</button>
+
+<div class="perfil-container">
+    <!-- ID do usuário no canto superior esquerdo -->
+    <div id="user-id">ID: <?php echo htmlspecialchars($player['id']); ?></div>
     
-    </script>
+    <div class="profile-picture">
+        <?php
+        // Verifica se o campo de imagem não está vazio e se o arquivo existe
+        if (!empty($player['imagem_perfil']) && file_exists('uploads/' . $player['imagem_perfil'])) {
+            echo "<img src='uploads/" . htmlspecialchars($player['imagem_perfil']) . "' alt='Foto de Perfil'>";
+        } else {
+            echo "<span>Sem Foto</span>";
+        }
+        ?>
+    </div>
+
+    <div class="separator"></div> <!-- Coluna azul -->
+
+    <div class="perfil-info">
+        <h2><?php echo htmlspecialchars($player['nome']); ?></h2> <!-- Nome do usuário próximo ao divisor azul -->
+        
+        <!-- Campo da senha com opção de visualização -->
+        <div>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" value="<?php echo htmlspecialchars($player['senha']); ?>" readonly>
+            <button type="button" onclick="togglePassword()">Mostrar</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Função para alternar a visualização da senha
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+}
+</script>
+
 </body>
 </html>
+
+<?php
+$conn->close(); // Fecha a conexão com o banco de dados
+?>

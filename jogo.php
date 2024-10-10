@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GEOCONTEXT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="jogo2.css"> <!-- Vincula o arquivo CSS externo -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="header">
-        <a href="perfil.php" class+="btn4">PERFIL</a>
+        <a href="perfil.php" class="btn"><i class="fas fa-user"></i> PERFIL</a>
     </div>
 
     <div class="container">
-        <h1>GeoContext</h1>
+        <h1>GEOCONTEXT</h1>
 
         <form id="stateForm" action="includes-back/process.php" method="POST">
             <div class="form-group">
                 <label for="state">Digite o nome do estado:</label>
-            
                 <input type="text" id="state" name="state" required>
             </div>
             <button type="submit" class="btn1">Enviar Palpite</button><br>

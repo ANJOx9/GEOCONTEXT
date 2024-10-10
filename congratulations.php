@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parabéns!</title>
     <link rel="stylesheet" href="congratulations.css"> <!-- Vincule um CSS específico, se desejar -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap" rel="stylesheet">
     <style>
         body, html {
             margin: 0;
@@ -31,9 +28,10 @@
     <div class="congratulations-container">
         <h1>Parabéns!</h1>
         <p>Você acertou o estado secreto!</p>
+        <img src="congrats-image.jpg" alt="Congratulations" class="congratulations-image"> <!-- Substitua pelo seu caminho de imagem -->
         <div class="video-container">
             <video id="congratulations-video" controls autoplay loop>
-                <source src="imgs/Congratulations Ecard - Vivid Greetings (1080p, h264, youtube).mp4" type="video/mp4"> <!-- Substitua pelo seu caminho de vídeo -->
+                <source src="Congratulations Ecard - Vivid Greetings (1080p, h264, youtube).mp4" type="video/mp4"> <!-- Substitua pelo seu caminho de vídeo -->
             </video>
         </div>
         <a href="jogo.php" class="button">Voltar ao Jogo</a>

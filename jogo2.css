@@ -1,8 +1,5 @@
 body {
-    font-family: "Lexend", system-ui;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
+    font-family: Arial, sans-serif;
     background-image: url('imgs/brazil.jpg');
     background-size: cover;
     background-position: center;
@@ -10,7 +7,7 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    margin: left 215px;;
+    margin: 215px;
 }
 
 .container {
@@ -66,15 +63,14 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
 }
-.btn4 {
-    display: block;
+
+.btn {
     width: 50px;
-    padding: 10px;
+    padding: 210px;
     background-color: #42668d;
-    border: none;
     color: #fff;
     font-size: 16px;
-    cursor: pointer;
+
     border-radius: 5px;
 }
 .btn:hover {
