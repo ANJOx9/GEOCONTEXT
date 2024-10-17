@@ -16,15 +16,18 @@ body {
 
 /* Container principal do perfil */
 .perfil-container {
-    width: 1700px; /* Largura ajustada */
-    height: 70%;   
+    width: 90%; /* Largura responsiva */
+    max-width: 1700px; /* Largura máxima */
+    height: auto; /* Altura automática */
     padding: 15px;
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex; /* Flexbox para layout */
-    align-items: center; /* Alinha os itens no centro verticalmente */
-    position: relative; /* Necessário para posicionar o ID */
+    flex-direction: row; /* Alinha os itens em linha */
+    justify-content: space-between; /* Espaço entre os itens */
+    align-items: center; /* Alinha os itens verticalmente */
+    position: relative; /* Necessário para o ID */
 }
 
 /* Estilo do ID no canto superior esquerdo */
@@ -40,37 +43,60 @@ body {
 .separator {
     width: 15px; /* Largura da coluna */
     background-color: #007bff; /* Cor azul */
-    height: 105%; /* Altura total do container */
-    margin-left: 0; /* Remove margens laterais */
+    height: 100%; /* Altura total do container */
 }
 
 /* Estilo da foto de perfil */
 .profile-picture {
-    flex: 0 0 150px; /* Tamanho fixo para a imagem de perfil */
-    height: 100%; /* Faz a altura ocupar 100% do container */
-    position: relative; /* Para ajustar a imagem dentro do container */
+    width: 150px; /* Largura fixa para a imagem de perfil */
+    height: 150px; /* Altura fixa */
+    display: flex; /* Flexbox para centralização */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    overflow: hidden; /* Esconde parte da imagem que ultrapassa o container */
+    border-radius: 20px; /* Bordas arredondadas */
 }
 
+/* Ajuste a imagem dentro do container */
 .profile-picture img {
     width: 100%;
     height: 100%; /* Ajuste para preencher todo o espaço do container */
     object-fit: cover; /* Cobre a área do container */
-    border-radius: 20px 0 0 20px; /* Bordas arredondadas apenas do lado esquerdo */
 }
 
 /* Estilo das informações do usuário */
 .perfil-info {
-    flex: 1; /* O restante do espaço é ocupado pelas informações */
+    padding: 20px; /* Espaçamento interno */
+    display: flex; /* Flexbox para layout */
+    flex-direction: column; /* Alinha itens em coluna */
+    align-items: center; /* Centraliza horizontalmente */
+    text-align: center; /* Centraliza o texto */
 }
 
 /* Alinha o nome diretamente encostado ao divisor azul */
 .perfil-info h2 {
-    margin: -10px 0 0 5px; /* Remova margens e acrescente margem esquerda para encostar */
-    padding: 0; /* Remove padding */
+    margin: 10px 0; /* Margem superior e inferior */
     font-size: 24px;
+    color: #333; /* Cor do texto */
 }
 
 .perfil-info p {
     font-size: 16px;
-    color: #666;
+    color: #666; /* Cor do texto secundário */
+}
+
+/* Botões de ação */
+button {
+    padding: 10px 15px;
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor em forma de mão */
+    font-size: 16px; /* Tamanho da fonte */
+    margin-top: 10px; /* Espaçamento superior */
+}
+
+button:hover {
+    background-color: #0056b3; /* Cor ao passar o mouse */
 }

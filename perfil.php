@@ -7,6 +7,9 @@ $username = "root"; // Altere para seu nome de usuário do MySQL
 $password = ""; // Altere para sua senha do MySQL, se houver
 $dbname = "geocontext"; // Altere para o nome do seu banco de dados
 
+// Habilita o modo de erro do MySQLi
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
 // Criando a conexão
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -22,11 +25,11 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Consulta para obter informações do player com base no ID do usuário logado
-$sql = "SELECT id, nome, senha, imagem_perfil FROM players WHERE id = ?";
+$sql = "SELECT id, nome, imagem_fundo FROM players WHERE id = ?";
 $stmt = $conn->prepare($sql);
 
 if (!$stmt) {
-    die("Erro ao preparar a consulta: " . $conn->error); // Verifica se houve erro ao preparar a consulta
+    die("Erro ao preparar a consulta: " . $conn->error);
 }
 
 // Usa o ID do usuário logado para a consulta
@@ -41,6 +44,50 @@ if ($result->num_rows === 0) {
 
 $player = $result->fetch_assoc();
 $stmt->close(); // Fecha a declaração
+
+// Processa a atualização de nome e imagem
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Atualiza o nome
+    if (!empty($_POST['nome'])) {
+        $novo_nome = $_POST['nome'];
+        $sql = "UPDATE players SET nome = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $novo_nome, $_SESSION['user_id']);
+        $stmt->execute();
+    }
+
+    // Processa o upload da nova imagem de fundo
+    if (isset($_FILES['fundo'])) {
+        $imagem_fundo = $_FILES['fundo'];
+        $imagem_fundo_nome = time() . "_" . basename($imagem_fundo['name']);
+        $imagem_fundo_destino = 'uploads/' . $imagem_fundo_nome;
+
+        if (move_uploaded_file($imagem_fundo['tmp_name'], $imagem_fundo_destino)) {
+            $sql = "UPDATE players SET imagem_fundo = ? WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("si", $imagem_fundo_nome, $_SESSION['user_id']);
+            $stmt->execute();
+        }
+    }
+
+    // Processa o upload da nova imagem de perfil
+    if (isset($_FILES['imagem'])) {
+        $imagem = $_FILES['imagem'];
+        $imagem_nome = time() . "_" . basename($imagem['name']);
+        $imagem_destino = 'uploads/' . $imagem_nome;
+
+        if (move_uploaded_file($imagem['tmp_name'], $imagem_destino)) {
+            $sql = "UPDATE players SET imagem_perfil = ? WHERE id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("si", $imagem_nome, $_SESSION['user_id']);
+            $stmt->execute();
+        }
+    }
+
+    // Redireciona para evitar resubmissão
+    header("Location: perfil.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,9 +98,51 @@ $stmt->close(); // Fecha a declaração
     <title>Perfil do Usuário</title>
     <link rel="stylesheet" href="perfil.css">
     <style>
-        /* Estilos adicionais para os botões */
-        .voltar-jogo, .alterar-perfil {
-            position: absolute;
+        /* Estilos gerais */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('uploads/<?php echo htmlspecialchars($player['imagem_fundo']); ?>'); /* Define a imagem de fundo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative; /* Permite posicionamento absoluto dos botões */
+        }
+
+        /* Container principal do perfil */
+        .perfil-container {
+            width: 100%; /* Largura responsiva */
+            max-width: 600px; /* Largura máxima */
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Fundo semi-transparente */
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex; /* Flexbox para layout */
+            flex-direction: column; /* Alinha os itens em coluna */
+            align-items: center; /* Centraliza horizontalmente */
+            text-align: center; /* Centraliza o texto */
+        }
+
+        /* Estilo da foto de perfil */
+        .profile-picture img {
+            max-width: 150px; /* Limita a largura da imagem */
+            border-radius: 50%; /* Faz a imagem circular */
+            margin-bottom: 0px; /* Espaçamento abaixo da imagem */
+        }
+
+        /* Estilo das informações do usuário */
+        .perfil-info {
+            margin-top: 20px; /* Espaçamento acima da seção de informações */
+        }
+
+        /* Estilos dos botões */
+        .voltar-jogo {
+            position: absolute; /* Posicionamento absoluto */
             padding: 10px 15px;
             background-color: #007bff; /* Cor de fundo do botão */
             color: white; /* Cor do texto */
@@ -61,73 +150,82 @@ $stmt->close(); // Fecha a declaração
             border-radius: 5px; /* Bordas arredondadas */
             cursor: pointer; /* Cursor em forma de mão */
             font-size: 16px; /* Tamanho da fonte */
-            z-index: 1000; /* Garante que o botão fique acima de outros elementos */
+            top: 20px; /* Distância do topo */
+            left: 20px; /* Distância da esquerda */
         }
-        
-        .voltar-jogo {
-            top: 15px; /* Distância do topo */
-            left: 15px; /* Distância da esquerda */
-        }
-        
+
         .voltar-jogo:hover {
             background-color: #0056b3; /* Cor ao passar o mouse */
         }
 
-        .alterar-perfil {
-            top: 15px; /* Distância do topo */
-            right: 15px; /* Distância da direita */
+        /* Estilo do formulário de atualização */
+        form {
+            margin-top: 20px; /* Espaçamento acima do formulário */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        
-        .alterar-perfil:hover {
+
+        input[type="text"], input[type="file"] {
+            margin-top: 10px; /* Espaçamento acima do campo */
+            padding: 8px;
+            border: 1px solid #ccc; /* Borda do campo */
+            border-radius: 5px; /* Bordas arredondadas */
+            width: 80%; /* Largura do campo */
+        }
+
+        input[type="submit"] {
+            margin-top: 15px; /* Espaçamento acima do botão de envio */
+            padding: 10px 15px;
+            background-color: #007bff; /* Cor de fundo do botão */
+            color: white; /* Cor do texto */
+            border: none; /* Sem borda */
+            border-radius: 5px; /* Bordas arredondadas */
+            cursor: pointer; /* Cursor em forma de mão */
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Cor ao passar o mouse */
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #007bff; /* Cor de fundo */
+            color: white; /* Cor do texto */
+            border-radius: 5px; /* Bordas arredondadas */
+            margin-top: 10px; /* Espaçamento acima */
+        }
+
+        .custom-file-upload:hover {
             background-color: #0056b3; /* Cor ao passar o mouse */
         }
     </style>
 </head>
 <body>
 
-<!-- Botão Voltar ao Jogo -->
-<button class="voltar-jogo" onclick="location.href='jogo.php'">Voltar ao Jogo</button>
-
-<!-- Botão Alterar Perfil -->
-<button class="alterar-perfil" onclick="location.href='perfil-alt.php'">Alterar Perfil</button>
-
 <div class="perfil-container">
-    <!-- ID do usuário no canto superior esquerdo -->
-    <div id="user-id">ID: <?php echo htmlspecialchars($player['id']); ?></div>
-    
-    <div class="profile-picture">
-        <?php
-        // Verifica se o campo de imagem não está vazio e se o arquivo existe
-        if (!empty($player['imagem_perfil']) && file_exists('uploads/' . $player['imagem_perfil'])) {
-            echo "<img src='uploads/" . htmlspecialchars($player['imagem_perfil']) . "' alt='Foto de Perfil'>";
-        } else {
-            echo "<span>Sem Foto</span>";
-        }
-        ?>
-    </div>
-
-    <div class="separator"></div> <!-- Coluna azul -->
-
     <div class="perfil-info">
-        <h2><?php echo htmlspecialchars($player['nome']); ?></h2> <!-- Nome do usuário próximo ao divisor azul -->
-        
-        <!-- Campo da senha com opção de visualização -->
-        <div>
-            <label for="password">Senha:</label>
-            <input type="password" id="password" value="<?php echo htmlspecialchars($player['senha']); ?>" readonly>
-            <button type="button" onclick="togglePassword()">Mostrar</button>
-        </div>
+        <h2><?php echo htmlspecialchars($player['nome']); ?></h2>
     </div>
+
+    <!-- Formulário para atualizar nome e imagem -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="text" name="nome" placeholder="Novo Nome" required><br>
+        
+        <label for="fundo" class="custom-file-upload">
+            Escolher plano de fundo
+        </label>
+        <input type="file" id="fundo" name="fundo" accept="image/*" style="display: none;">
+        
+
+        <input type="submit" value="Atualizar perfil"><br>
+    </form>
 </div>
 
-<script>
-// Função para alternar a visualização da senha
-function togglePassword() {
-    const passwordInput = document.getElementById('password');
-    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-    passwordInput.setAttribute('type', type);
-}
-</script>
+<!-- Botão Voltar ao Jogo -->
+<button class="voltar-jogo" onclick="location.href='jogo.php'">Voltar ao Jogo</button>
 
 </body>
 </html>
@@ -135,3 +233,4 @@ function togglePassword() {
 <?php
 $conn->close(); // Fecha a conexão com o banco de dados
 ?>
+    
