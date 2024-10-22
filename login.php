@@ -47,13 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            width: 20px;
+            width: 10px;
             height: 20px;
         }
 
         .eye::before {
             content: "👁️"; /* Emoji do olho para visualizar a senha */
-            display: inline-block;
         }
 
         .eye.hidden::before {
